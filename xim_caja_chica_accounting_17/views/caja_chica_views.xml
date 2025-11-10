@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caja_chica_tree" model="ir.ui.view">
+        <field name="name">caja.chica.tree</field>
+        <field name="model">caja.chica</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="concept"/>
+                <field name="supervisor_id"/>
+                <field name="total_amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_caja_chica_form" model="ir.ui.view">
+        <field name="name">caja.chica.form</field>
+        <field name="model">caja.chica</field>
+        <field name="arch" type="xml">
+            <form string="Caja Chica">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="date"/>
+                        <field name="concept"/>
+                        <field name="supervisor_id"/>
+                    </group>
+                    <group>
+                        <field name="account_expense_id"/>
+                        <field name="account_iva_id"/>
+                        <field name="account_cash_id"/>
+                        <field name="journal_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Documentos">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="doc_type"/>
+                                    <field name="series"/>
+                                    <field name="number"/>
+                                    <field name="concept"/>
+                                    <field name="amount"/>
+                                    <field name="iva"/>
+                                    <field name="idp"/>
+                                    <field name="total_line"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Resumen">
+                            <group>
+                                <field name="total_amount" readonly="1"/>
+                                <field name="total_iva" readonly="1"/>
+                                <field name="total_idp" readonly="1"/>
+                                <field name="move_id" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Confirmar" type="object" name="action_confirm" states="draft" class="btn-secondary"/>
+                        <button string="Liquidar" type="object" name="action_liquidate" states="confirmed" class="btn-primary"/>
+                        <button string="Imprimir Provisión" type="action" class="btn-default"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caja_chica" model="ir.actions.act_window">
+        <field name="name">Caja Chica</field>
+        <field name="res_model">caja.chica</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_account_root" name="Contabilidad"/>
+    <menuitem id="menu_xim_caja_chica" name="Caja Chica" parent="menu_account_root" action="action_caja_chica"/>
+</odoo>

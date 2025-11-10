@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_caja_chica" model="ir.sequence">
+        <field name="name">Caja Chica</field>
+        <field name="prefix">CC</field>
+        <field name="padding">4</field>
+        <field name="implementation">standard</field>
+    </record>
+</odoo>
